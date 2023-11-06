@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class MainScreenCollectionViewCell: UICollectionViewCell {
     
@@ -35,5 +36,9 @@ class MainScreenCollectionViewCell: UICollectionViewCell {
         imageView.backgroundColor = UIColor.red
         return imageView
     }()
+    
+    func configureWith(_ imageURL: String) {
+        imageView.kf.setImage(with: URL(string: imageURL))
+    }
     
 }
