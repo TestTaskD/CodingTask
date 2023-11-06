@@ -17,7 +17,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Here is a place to set a number of scrren items to show.
         let values = [
             ConfigStringValue(key: "image1", value: ""),
-            ConfigStringValue(key: "image2", value: "")
+            ConfigStringValue(key: "image2", value: ""),
+            ConfigStringValue(key: "image3", value: ""),
+            ConfigStringValue(key: "image4", value: ""),
+            ConfigStringValue(key: "image5", value: ""),
+            ConfigStringValue(key: "image6", value: ""),
         ]
         let firebaseDataSource = FirebaseDataSource(defaultValues: values)
         let presenter = Presenter(dataSource: firebaseDataSource)
