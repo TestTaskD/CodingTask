@@ -21,6 +21,7 @@
 		922CFA3C2AF8E37600B4BE7C /* RemoteConfigurationParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922CFA3B2AF8E37600B4BE7C /* RemoteConfigurationParameter.swift */; };
 		922CFA3E2AF8F74400B4BE7C /* ColumnFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922CFA3D2AF8F74400B4BE7C /* ColumnFlowLayout.swift */; };
 		922CFA402AF8F79D00B4BE7C /* MainScreenCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922CFA3F2AF8F79D00B4BE7C /* MainScreenCollectionViewCell.swift */; };
+		922CFA432AF8F91300B4BE7C /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 922CFA422AF8F91300B4BE7C /* Kingfisher */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				922CFA432AF8F91300B4BE7C /* Kingfisher in Frameworks */,
 				922CFA322AF8C4F700B4BE7C /* FirebaseRemoteConfig in Frameworks */,
 				922CFA342AF8C4F700B4BE7C /* FirebaseRemoteConfigSwift in Frameworks */,
 			);
@@ -108,6 +110,7 @@
 			packageProductDependencies = (
 				922CFA312AF8C4F700B4BE7C /* FirebaseRemoteConfig */,
 				922CFA332AF8C4F700B4BE7C /* FirebaseRemoteConfigSwift */,
+				922CFA422AF8F91300B4BE7C /* Kingfisher */,
 			);
 			productName = CodingTask;
 			productReference = 922CFA192AF8C2E400B4BE7C /* CodingTask.app */;
@@ -139,6 +142,7 @@
 			mainGroup = 922CFA102AF8C2E400B4BE7C;
 			packageReferences = (
 				922CFA302AF8C4F700B4BE7C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				922CFA412AF8F91300B4BE7C /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 922CFA1A2AF8C2E400B4BE7C /* Products */;
 			projectDirPath = "";
@@ -403,6 +407,14 @@
 				minimumVersion = 10.0.0;
 			};
 		};
+		922CFA412AF8F91300B4BE7C /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -415,6 +427,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 922CFA302AF8C4F700B4BE7C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseRemoteConfigSwift;
+		};
+		922CFA422AF8F91300B4BE7C /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 922CFA412AF8F91300B4BE7C /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
