@@ -19,6 +19,8 @@
 		922CFA382AF8C59300B4BE7C /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922CFA372AF8C59300B4BE7C /* Presenter.swift */; };
 		922CFA3A2AF8C69100B4BE7C /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922CFA392AF8C69100B4BE7C /* DataSource.swift */; };
 		922CFA3C2AF8E37600B4BE7C /* RemoteConfigurationParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922CFA3B2AF8E37600B4BE7C /* RemoteConfigurationParameter.swift */; };
+		922CFA3E2AF8F74400B4BE7C /* ColumnFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922CFA3D2AF8F74400B4BE7C /* ColumnFlowLayout.swift */; };
+		922CFA402AF8F79D00B4BE7C /* MainScreenCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922CFA3F2AF8F79D00B4BE7C /* MainScreenCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		922CFA372AF8C59300B4BE7C /* Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
 		922CFA392AF8C69100B4BE7C /* DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
 		922CFA3B2AF8E37600B4BE7C /* RemoteConfigurationParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfigurationParameter.swift; sourceTree = "<group>"; };
+		922CFA3D2AF8F74400B4BE7C /* ColumnFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColumnFlowLayout.swift; sourceTree = "<group>"; };
+		922CFA3F2AF8F79D00B4BE7C /* MainScreenCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,8 +73,10 @@
 			isa = PBXGroup;
 			children = (
 				922CFA1C2AF8C2E400B4BE7C /* AppDelegate.swift */,
+				922CFA3F2AF8F79D00B4BE7C /* MainScreenCollectionViewCell.swift */,
 				922CFA1E2AF8C2E400B4BE7C /* SceneDelegate.swift */,
 				922CFA202AF8C2E400B4BE7C /* ViewController.swift */,
+				922CFA3D2AF8F74400B4BE7C /* ColumnFlowLayout.swift */,
 				922CFA372AF8C59300B4BE7C /* Presenter.swift */,
 				922CFA392AF8C69100B4BE7C /* DataSource.swift */,
 				922CFA3B2AF8E37600B4BE7C /* RemoteConfigurationParameter.swift */,
@@ -163,9 +169,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				922CFA212AF8C2E400B4BE7C /* ViewController.swift in Sources */,
+				922CFA3E2AF8F74400B4BE7C /* ColumnFlowLayout.swift in Sources */,
 				922CFA1D2AF8C2E400B4BE7C /* AppDelegate.swift in Sources */,
 				922CFA3C2AF8E37600B4BE7C /* RemoteConfigurationParameter.swift in Sources */,
 				922CFA382AF8C59300B4BE7C /* Presenter.swift in Sources */,
+				922CFA402AF8F79D00B4BE7C /* MainScreenCollectionViewCell.swift in Sources */,
 				922CFA3A2AF8C69100B4BE7C /* DataSource.swift in Sources */,
 				922CFA1F2AF8C2E400B4BE7C /* SceneDelegate.swift in Sources */,
 			);

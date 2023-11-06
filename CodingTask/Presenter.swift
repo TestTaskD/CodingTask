@@ -42,13 +42,12 @@ class Presenter {
             }
         }
     }
-    
 }
 
 extension Presenter: PresenterProtocol {
 
     func start()  {
-        Task {
+        Task { @MainActor in
             items = try await dataSource
                 .getAll()
                 .filter({ $0.isHidden == false })
@@ -66,11 +65,16 @@ extension ScreenItemModel {
     init?(dictionary: [String: Any]?) {
         guard
             let dict = dictionary,
-            let imageUrl = dict["imageURL"] as? String,
-            let isHidden = dict["isHidden"] as? Bool
+            let imageUrl = dict[Constants.imageURL] as? String,
+            let isHidden = dict[Constants.isHidden] as? Bool
         else { return nil }
              
         self.imageURL = imageUrl
         self.isHidden = isHidden
+    }
+    
+    private enum Constants {
+        static let imageURL = "imageURL"
+        static let isHidden = "isHidden"
     }
 }
