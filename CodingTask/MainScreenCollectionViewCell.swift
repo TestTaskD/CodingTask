@@ -37,8 +37,9 @@ class MainScreenCollectionViewCell: UICollectionViewCell {
         return imageView
     }()
     
-    func configureWith(_ imageURL: String) {
-        imageView.kf.setImage(with: URL(string: imageURL))
+    func configureWith(_ imageURL: String?) {
+        guard let url = imageURL else { return }
+        imageView.kf.setImage(with: URL(string: url))
     }
     
 }

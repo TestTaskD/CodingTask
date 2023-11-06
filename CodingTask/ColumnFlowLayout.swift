@@ -8,12 +8,8 @@
 import UIKit
 
 class ColumnFlowLayout: UICollectionViewFlowLayout {
-
     private let cellHeight: CGFloat = 200.0
-
-    // MARK: Layout Overrides
     
-    /// - Tag: ColumnFlowExample
     override func prepare() {
         super.prepare()
         

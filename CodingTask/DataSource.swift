@@ -45,7 +45,7 @@ class FirebaseDataSource {
                 self?.firebaseRemoteConfiguration.activate()
                 let models = configUpdate?.updatedKeys.compactMap { key in
                     let dictionary = self?.firebaseRemoteConfiguration.configValue(forKey: key).jsonValue as? [String: Any]
-                    return ScreenItemModel(dictionary: dictionary)
+                    return ScreenItemModel(dictionary: dictionary, key: key)
                 } ?? [ScreenItemModel]()
                 self?.onUpdate?(.success(models))
             }
@@ -63,7 +63,7 @@ extension FirebaseDataSource: DataSourceProtocol {
                     let itemModels = self.defaultValues.compactMap({
                         let dictionary = self.firebaseRemoteConfiguration.configValue(forKey: $0.key).jsonValue as? [String: Any]
                         print("")
-                        return ScreenItemModel(dictionary: dictionary)
+                        return ScreenItemModel(dictionary: dictionary, key: $0.key)
                     })
                     continuation.resume(returning: itemModels)
                 }

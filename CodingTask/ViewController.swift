@@ -9,7 +9,7 @@ import UIKit
 
 protocol ViewProtocol: AnyObject {
     func reload()
-    func reloadAtIndexPath(_ indexPath: IndexPath)
+    func reloadAtIndexPath(_ indexPath: [IndexPath])
 }
 
 class MainViewController: UIViewController {
@@ -55,23 +55,24 @@ extension MainViewController: ViewProtocol {
         collectionView.reloadData()
     }
     
-    func reloadAtIndexPath(_ indexPath: IndexPath) {
-        
+    func reloadAtIndexPath(_ indexPath: [IndexPath]) {
+        collectionView.performBatchUpdates { [weak collectionView] in
+            collectionView?.reloadItems(at: indexPath)
+        }
     }
 }
 
 extension MainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        presenter.items.count
+        presenter.screenItems.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cellViewModel = presenter.items[indexPath.row]
+        let cellViewModel = presenter.screenItems[indexPath.row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: MainScreenCollectionViewCell.self), for: indexPath) as! MainScreenCollectionViewCell
-        cell.configureWith(cellViewModel.imageURL)
+        cell.configureWith(cellViewModel.imageParameters?.url)
         return cell
     }
-    
 }
 
 
