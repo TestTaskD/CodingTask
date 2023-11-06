@@ -12,15 +12,15 @@ protocol DataSourceProtocol {
     func getAll() async throws -> [ScreenItemModel]
     
     var defaultValues: [RemoteConfigurationParameter] { get }
-    var onUpdate: ((Result<[ScreenItemModel], Error>) -> Void)? { get set }
+    var onConfigUpdate: ((Result<[ScreenItemModel], Error>) -> Void)? { get set }
 }
 
-class FirebaseDataSource {
+final class FirebaseDataSource {
     private let firebaseRemoteConfiguration: RemoteConfig
     
     private(set) var defaultValues: [RemoteConfigurationParameter]
     
-    var onUpdate: ((Result<[ScreenItemModel], Error>) -> Void)?
+    var onConfigUpdate: ((Result<[ScreenItemModel], Error>) -> Void)?
     
     init(defaultValues: [RemoteConfigurationParameter]) {
         self.defaultValues = defaultValues
@@ -40,14 +40,14 @@ class FirebaseDataSource {
         
         firebaseRemoteConfiguration.addOnConfigUpdateListener { [weak self] configUpdate, error in
             if let error = error {
-                self?.onUpdate?(.failure(error))
+                self?.onConfigUpdate?(.failure(error))
             } else {
                 self?.firebaseRemoteConfiguration.activate()
                 let models = configUpdate?.updatedKeys.compactMap { key in
                     let dictionary = self?.firebaseRemoteConfiguration.configValue(forKey: key).jsonValue as? [String: Any]
                     return ScreenItemModel(dictionary: dictionary, key: key)
                 } ?? [ScreenItemModel]()
-                self?.onUpdate?(.success(models))
+                self?.onConfigUpdate?(.success(models))
             }
         }
     }

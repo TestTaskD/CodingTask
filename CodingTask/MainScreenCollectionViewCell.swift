@@ -8,32 +8,32 @@
 import UIKit
 import Kingfisher
 
-class MainScreenCollectionViewCell: UICollectionViewCell {
+final class MainScreenCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.addSubview(imageView)
         
         NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
-            imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20)
+            imageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 30),
+            imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 30),
+            imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -30),
+            imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -30)
         ])
         
-        contentView.backgroundColor = .green
         contentView.layer.cornerRadius = 20
+        contentView.layer.borderColor = UIColor.gray.cgColor
+        contentView.layer.borderWidth = 1
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    lazy var imageView: UIImageView = {
+    private lazy var imageView: UIImageView = {
         let imageView = UIImageView(frame: .zero)
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleToFill
-        imageView.backgroundColor = UIColor.red
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     

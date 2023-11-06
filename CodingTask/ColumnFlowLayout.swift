@@ -7,8 +7,8 @@
 
 import UIKit
 
-class ColumnFlowLayout: UICollectionViewFlowLayout {
-    private let cellHeight: CGFloat = 200.0
+final class ColumnFlowLayout: UICollectionViewFlowLayout {
+    private let cellHeight: CGFloat = 250.0
     
     override func prepare() {
         super.prepare()

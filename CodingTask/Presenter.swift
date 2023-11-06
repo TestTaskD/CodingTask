@@ -14,7 +14,7 @@ protocol PresenterProtocol {
     func start()
 }
 
-class Presenter {
+final class Presenter {
     private var dataSource: DataSourceProtocol
     private var items = [ScreenItemModel]()
     
@@ -22,7 +22,7 @@ class Presenter {
     
     var screenItems: [ScreenItemModel] {
         get {
-            return items.filter({ $0.imageParameters?.isHidden == false })
+            return items.filter({ $0.image?.isHidden == false })
         }
     }
 
@@ -36,7 +36,7 @@ class Presenter {
         for index in 0..<objects.count {
             let updatedItem = objects[index]
             if let indexOfUpdatedItemInExistingArray = items.firstIndex(of: updatedItem) {
-                if updatedItem.imageParameters != nil {
+                if updatedItem.image != nil {
                     items[indexOfUpdatedItemInExistingArray] = updatedItem
                 } else {
                     items.remove(at: indexOfUpdatedItemInExistingArray)
@@ -48,16 +48,8 @@ class Presenter {
         view?.reload()
     }
     
-    private func fetchAll() {
-        Task { @MainActor in
-            items = try await dataSource
-                .getAll()
-            view?.reload()
-        }
-    }
-    
     private func setup() {
-        dataSource.onUpdate = { [weak self ] result in
+        dataSource.onConfigUpdate = { [weak self ] result in
             switch result {
             case .success(let screenItemModels):
                 self?.update(screenItemModels)
@@ -71,13 +63,21 @@ class Presenter {
 extension Presenter: PresenterProtocol {
 
     func start()  {
-           fetchAll()
+        Task { @MainActor in
+            do {
+                items = try await dataSource.getAll()
+                view?.reload()
+            } catch {
+                print("error: \(error)")
+            }
+            
+        }
     }
 }
 
 struct ScreenItemModel {
     let key: String
-    let imageParameters: ImageParameters?
+    let image: ImageParameters?
 }
 
 extension ScreenItemModel: Equatable {
@@ -92,9 +92,9 @@ extension ScreenItemModel {
         if let dict = dictionary,
            let imageUrl = dict[Constants.imageURL] as? String,
            let isHidden = dict[Constants.isHidden] as? Bool {
-           self.imageParameters = ImageParameters(url: imageUrl, isHidden: isHidden)
+           self.image = ImageParameters(url: imageUrl, isHidden: isHidden)
         } else {
-            self.imageParameters = nil
+            self.image = nil
         }
         self.key = key
     }

@@ -12,7 +12,7 @@ protocol ViewProtocol: AnyObject {
     func reloadAtIndexPath(_ indexPath: [IndexPath])
 }
 
-class MainViewController: UIViewController {
+final class MainViewController: UIViewController {
     
     private var presenter: PresenterProtocol
     
@@ -70,12 +70,7 @@ extension MainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cellViewModel = presenter.screenItems[indexPath.row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: MainScreenCollectionViewCell.self), for: indexPath) as! MainScreenCollectionViewCell
-        cell.configureWith(cellViewModel.imageParameters?.url)
+        cell.configureWith(cellViewModel.image?.url)
         return cell
     }
 }
-
-
-
-
-
