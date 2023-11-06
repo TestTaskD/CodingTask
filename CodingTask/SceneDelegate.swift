@@ -11,13 +11,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        
         guard let windowScene = scene as? UIWindowScene else { return }
-             let vc = MainViewController()
-             window = UIWindow(windowScene: windowScene)
-             window?.rootViewController = vc
-             window?.makeKeyAndVisible()
+        // Here is a place to set a number of scrren items to show.
+        let values = [
+            ConfigStringValue(key: "image1", value: ""),
+            ConfigStringValue(key: "image2", value: "")
+        ]
+        let firebaseDataSource = FirebaseDataSource(defaultValues: values)
+        let presenter = Presenter(dataSource: firebaseDataSource)
+        let vc = MainViewController(presenter: presenter)
+        window = UIWindow(windowScene: windowScene)
+        window?.rootViewController = vc
+        window?.makeKeyAndVisible()
     }
 }
-
