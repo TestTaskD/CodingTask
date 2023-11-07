@@ -88,8 +88,7 @@
 		922CFA4A2AFA52C600B4BE7C /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				922CFA3B2AF8E37600B4BE7C /* RemoteConfigurationParameter.swift */,
-				922CFA442AFA513D00B4BE7C /* ConfigItemModel.swift */,
+				922CFA502AFA5A4000B4BE7C /* DTO */,
 				922CFA462AFA517700B4BE7C /* UpdateManager.swift */,
 				922CFA482AFA51AD00B4BE7C /* UpdateType.swift */,
 				922CFA392AF8C69100B4BE7C /* DataSource.swift */,
@@ -143,6 +142,15 @@
 				922CFA352AF8C51200B4BE7C /* GoogleService-Info.plist */,
 			);
 			path = App;
+			sourceTree = "<group>";
+		};
+		922CFA502AFA5A4000B4BE7C /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				922CFA442AFA513D00B4BE7C /* ConfigItemModel.swift */,
+				922CFA3B2AF8E37600B4BE7C /* RemoteConfigurationParameter.swift */,
+			);
+			path = DTO;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

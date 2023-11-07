@@ -15,7 +15,7 @@ protocol DataSourceProtocol {
     var onConfigUpdate: ((Result<[ConfigItemModel], Error>) -> Void)? { get set }
 }
 
-// function signature for protocol to moke remote confif for testing purposes
+// function signature for protocol to moke remote config for testing purposes
 // func addOnConfigUpdateListener(remoteConfigUpdateCompletion listener: @escaping (RemoteConfigUpdate?, Error?) -> Void) -> ConfigUpdateListenerRegistration
 
 final class FirebaseDataSource {

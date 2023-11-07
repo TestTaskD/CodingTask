@@ -19,14 +19,6 @@ final class Presenter {
     private var items = [ConfigItemModel]()
     
     weak var view: ViewProtocol?
-    
-    var screenItems: [String] {
-        get {
-            return items
-                .filter({ $0.image?.isHidden == false })
-                .compactMap({ $0.image?.url })
-        }
-    }
 
     init(dataSource: DataSourceProtocol) {
         self.dataSource = dataSource
@@ -54,6 +46,14 @@ final class Presenter {
 }
 
 extension Presenter: PresenterProtocol{
+    var screenItems: [String] {
+        get {
+            return items
+                .filter({ $0.image?.isHidden == false })
+                .compactMap({ $0.image?.url })
+        }
+    }
+    
     func start()  {
         Task { @MainActor in
             do {
