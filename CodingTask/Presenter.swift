@@ -33,18 +33,9 @@ final class Presenter {
     }
     
     private func update(_ objects: [ScreenItemModel]) {
-        for index in 0..<objects.count {
-            let updatedItem = objects[index]
-            if let indexOfUpdatedItemInExistingArray = items.firstIndex(of: updatedItem) {
-                if updatedItem.image != nil {
-                    items[indexOfUpdatedItemInExistingArray] = updatedItem
-                } else {
-                    items.remove(at: indexOfUpdatedItemInExistingArray)
-                }
-            } else {
-                items.append(updatedItem)
-            }
-        }
+        let updateManager = UpdateManager()
+        let updateType = updateManager.typeOfUpdate(for: items, itemsToUpdate: objects)
+        items = updateManager.updated(collection: items, with: objects, typeOfUpdate: updateType)
         view?.reload()
     }
     
@@ -60,12 +51,16 @@ final class Presenter {
     }
 }
 
-extension Presenter: PresenterProtocol {
+extension Presenter: PresenterProtocol{
 
     func start()  {
         Task { @MainActor in
             do {
                 items = try await dataSource.getAll()
+                print("Conficg fetched")
+                items.forEach({
+                    print("item key recieved: \($0.key)")
+                })
                 view?.reload()
             } catch {
                 print("error: \(error)")
@@ -75,9 +70,9 @@ extension Presenter: PresenterProtocol {
     }
 }
 
-struct ScreenItemModel {
-    let key: String
-    let image: ImageParameters?
+struct ScreenItemModel: ConfigItem {
+    var key: String
+    var image: ImageParameters?
 }
 
 extension ScreenItemModel: Equatable {
@@ -109,3 +104,75 @@ struct ImageParameters {
     let url: String
     let isHidden: Bool
 }
+
+protocol Keyable: Equatable {
+    var key: String { get set }
+}
+
+protocol ConfigImage: Equatable {
+    var image: ImageParameters? { get set }
+}
+
+typealias ConfigItem = Keyable & ConfigImage
+
+protocol Updater {
+    associatedtype T: Equatable
+    func typeOfUpdate(for collection: [T], itemsToUpdate toUpdate: [T]) -> UpdateType<T>?
+    func updated(collection: [T], with newValues: [T], typeOfUpdate: UpdateType<T>?) -> [T]
+   
+}
+
+enum UpdateType<T> {
+    case addition(element:T), editing(element:T, atIndex: Array.Index ), deletion(atIndex: Array.Index )
+}
+
+struct UpdateManager: Updater {
+    typealias T = ScreenItemModel
+    
+    func typeOfUpdate(for collection: [ScreenItemModel], itemsToUpdate: [ScreenItemModel]) -> UpdateType<ScreenItemModel>? {
+        var type: UpdateType<ScreenItemModel>? = nil
+        for index in 0..<itemsToUpdate.count {
+            let consideredItem = itemsToUpdate[index]
+            if // Update condition:
+                let indexOfEntryInCollection = collection.firstIndex(of: consideredItem),
+                consideredItem.image != nil
+            {
+                type = .editing(element: consideredItem, atIndex: indexOfEntryInCollection)
+            }
+            else if // addition condition:
+                collection.firstIndex(of: consideredItem) == nil,
+                // the condition below prevents an obgject of beeing added if it is not included in defaults but just got deleted from config.
+                // For inst: remote config has 7 items, the app is alloved to show (and does show) only 6 items
+                // Admin deleted 7th item from config. In that case the entry object will have valid key but image field will be nil
+                consideredItem.image != nil,
+                collection.count <= 5
+            {
+                type = .addition(element: consideredItem)
+            }
+            else if // deletion condition:
+                let indexOfEntryInCollection = collection.firstIndex(of: consideredItem),
+                consideredItem.image == nil
+            {
+                type = .deletion(atIndex: indexOfEntryInCollection)
+            }
+        }
+        return type
+    }
+    
+    func updated(collection: [ScreenItemModel], with newValues: [ScreenItemModel], typeOfUpdate: UpdateType<ScreenItemModel>?) -> [ScreenItemModel] {
+        guard let typeOfUpdate = typeOfUpdate else { return collection }
+        var mutableCollection = collection
+        switch typeOfUpdate {
+        case .addition(let elementToAdd):
+            mutableCollection.append(elementToAdd)
+            return mutableCollection
+        case .editing(element: let elementToReplace, atIndex: let index):
+            mutableCollection[index] = elementToReplace
+            return mutableCollection
+        case .deletion(atIndex: let index):
+            mutableCollection.remove(at: index)
+            return mutableCollection
+        }
+    }
+}
+    
