@@ -9,7 +9,7 @@ import Foundation
 
 protocol PresenterProtocol {
     var view: ViewProtocol? { get set }
-    var screenItems: [ConfigItemModel] { get }
+    var screenItems: [String] { get }
     
     func start()
 }
@@ -20,9 +20,11 @@ final class Presenter {
     
     weak var view: ViewProtocol?
     
-    var screenItems: [ConfigItemModel] {
+    var screenItems: [String] {
         get {
-            return items.filter({ $0.image?.isHidden == false })
+            return items
+                .filter({ $0.image?.isHidden == false })
+                .compactMap({ $0.image?.url })
         }
     }
 

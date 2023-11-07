@@ -78,23 +78,71 @@
 		922CFA1B2AF8C2E400B4BE7C /* CodingTask */ = {
 			isa = PBXGroup;
 			children = (
-				922CFA1C2AF8C2E400B4BE7C /* AppDelegate.swift */,
-				922CFA3F2AF8F79D00B4BE7C /* MainScreenCollectionViewCell.swift */,
-				922CFA1E2AF8C2E400B4BE7C /* SceneDelegate.swift */,
-				922CFA202AF8C2E400B4BE7C /* ViewController.swift */,
-				922CFA3D2AF8F74400B4BE7C /* ColumnFlowLayout.swift */,
-				922CFA372AF8C59300B4BE7C /* Presenter.swift */,
-				922CFA482AFA51AD00B4BE7C /* UpdateType.swift */,
-				922CFA462AFA517700B4BE7C /* UpdateManager.swift */,
-				922CFA442AFA513D00B4BE7C /* ConfigItemModel.swift */,
-				922CFA392AF8C69100B4BE7C /* DataSource.swift */,
-				922CFA3B2AF8E37600B4BE7C /* RemoteConfigurationParameter.swift */,
-				922CFA352AF8C51200B4BE7C /* GoogleService-Info.plist */,
-				922CFA252AF8C2E500B4BE7C /* Assets.xcassets */,
-				922CFA272AF8C2E500B4BE7C /* LaunchScreen.storyboard */,
-				922CFA2A2AF8C2E500B4BE7C /* Info.plist */,
+				922CFA4F2AFA53AB00B4BE7C /* App */,
+				922CFA4E2AFA530700B4BE7C /* Resources */,
+				922CFA4D2AFA52E700B4BE7C /* Sources */,
 			);
 			path = CodingTask;
+			sourceTree = "<group>";
+		};
+		922CFA4A2AFA52C600B4BE7C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				922CFA3B2AF8E37600B4BE7C /* RemoteConfigurationParameter.swift */,
+				922CFA442AFA513D00B4BE7C /* ConfigItemModel.swift */,
+				922CFA462AFA517700B4BE7C /* UpdateManager.swift */,
+				922CFA482AFA51AD00B4BE7C /* UpdateType.swift */,
+				922CFA392AF8C69100B4BE7C /* DataSource.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		922CFA4B2AFA52D300B4BE7C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				922CFA3D2AF8F74400B4BE7C /* ColumnFlowLayout.swift */,
+				922CFA202AF8C2E400B4BE7C /* ViewController.swift */,
+				922CFA3F2AF8F79D00B4BE7C /* MainScreenCollectionViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		922CFA4C2AFA52DB00B4BE7C /* Pressenter */ = {
+			isa = PBXGroup;
+			children = (
+				922CFA372AF8C59300B4BE7C /* Presenter.swift */,
+			);
+			path = Pressenter;
+			sourceTree = "<group>";
+		};
+		922CFA4D2AFA52E700B4BE7C /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				922CFA4A2AFA52C600B4BE7C /* Model */,
+				922CFA4B2AFA52D300B4BE7C /* View */,
+				922CFA4C2AFA52DB00B4BE7C /* Pressenter */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		922CFA4E2AFA530700B4BE7C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				922CFA252AF8C2E500B4BE7C /* Assets.xcassets */,
+				922CFA272AF8C2E500B4BE7C /* LaunchScreen.storyboard */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		922CFA4F2AFA53AB00B4BE7C /* App */ = {
+			isa = PBXGroup;
+			children = (
+				922CFA1C2AF8C2E400B4BE7C /* AppDelegate.swift */,
+				922CFA1E2AF8C2E400B4BE7C /* SceneDelegate.swift */,
+				922CFA2A2AF8C2E500B4BE7C /* Info.plist */,
+				922CFA352AF8C51200B4BE7C /* GoogleService-Info.plist */,
+			);
+			path = App;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

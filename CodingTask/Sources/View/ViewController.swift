@@ -70,7 +70,7 @@ extension MainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cellViewModel = presenter.screenItems[indexPath.row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: MainScreenCollectionViewCell.self), for: indexPath) as! MainScreenCollectionViewCell
-        cell.configureWith(cellViewModel.image?.url)
+        cell.configureWith(cellViewModel)
         return cell
     }
 }
