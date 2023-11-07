@@ -9,13 +9,13 @@ import Foundation
 import Firebase
 
 protocol DataSourceProtocol {
-    func getAll() async throws -> [ScreenItemModel]
+    func getAll() async throws -> [ConfigItemModel]
     
     var defaultValues: [RemoteConfigurationParameter] { get }
-    var onConfigUpdate: ((Result<[ScreenItemModel], Error>) -> Void)? { get set }
+    var onConfigUpdate: ((Result<[ConfigItemModel], Error>) -> Void)? { get set }
 }
 
-// function signature for protocol to moke remote confif for testing purposes 
+// function signature for protocol to moke remote confif for testing purposes
 // func addOnConfigUpdateListener(remoteConfigUpdateCompletion listener: @escaping (RemoteConfigUpdate?, Error?) -> Void) -> ConfigUpdateListenerRegistration
 
 final class FirebaseDataSource {
@@ -23,7 +23,7 @@ final class FirebaseDataSource {
     
     private(set) var defaultValues: [RemoteConfigurationParameter]
     
-    var onConfigUpdate: ((Result<[ScreenItemModel], Error>) -> Void)?
+    var onConfigUpdate: ((Result<[ConfigItemModel], Error>) -> Void)?
     
     init(defaultValues: [RemoteConfigurationParameter]) {
         self.defaultValues = defaultValues
@@ -48,8 +48,8 @@ final class FirebaseDataSource {
                 self?.firebaseRemoteConfiguration.activate()
                 let models = configUpdate?.updatedKeys.compactMap { key in
                     let dictionary = self?.firebaseRemoteConfiguration.configValue(forKey: key).jsonValue as? [String: Any]
-                    return ScreenItemModel(dictionary: dictionary, key: key)
-                } ?? [ScreenItemModel]()
+                    return ConfigItemModel(dictionary: dictionary, key: key)
+                } ?? [ConfigItemModel]()
                 self?.onConfigUpdate?(.success(models))
             }
         }
@@ -57,7 +57,7 @@ final class FirebaseDataSource {
 }
 
 extension FirebaseDataSource: DataSourceProtocol {
-    func getAll() async throws -> [ScreenItemModel] {
+    func getAll() async throws -> [ConfigItemModel] {
         return try await withUnsafeThrowingContinuation({ continuation in
             firebaseRemoteConfiguration.fetchAndActivate { (status, error) in
                 if let error = error {
@@ -66,7 +66,7 @@ extension FirebaseDataSource: DataSourceProtocol {
                     let itemModels = self.defaultValues.compactMap({
                         let dictionary = self.firebaseRemoteConfiguration.configValue(forKey: $0.key).jsonValue as? [String: Any]
                         print("")
-                        return ScreenItemModel(dictionary: dictionary, key: $0.key)
+                        return ConfigItemModel(dictionary: dictionary, key: $0.key)
                     })
                     continuation.resume(returning: itemModels)
                 }

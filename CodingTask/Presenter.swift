@@ -9,18 +9,18 @@ import Foundation
 
 protocol PresenterProtocol {
     var view: ViewProtocol? { get set }
-    var screenItems: [ScreenItemModel] { get }
+    var screenItems: [ConfigItemModel] { get }
     
     func start()
 }
 
 final class Presenter {
     private var dataSource: DataSourceProtocol
-    private var items = [ScreenItemModel]()
+    private var items = [ConfigItemModel]()
     
     weak var view: ViewProtocol?
     
-    var screenItems: [ScreenItemModel] {
+    var screenItems: [ConfigItemModel] {
         get {
             return items.filter({ $0.image?.isHidden == false })
         }
@@ -32,7 +32,7 @@ final class Presenter {
         setup()
     }
     
-    private func update(_ objects: [ScreenItemModel]) {
+    private func update(_ objects: [ConfigItemModel]) {
         let updateManager = UpdateManager()
         let updateType = updateManager.typeOfUpdate(for: items, itemsToUpdate: objects)
         items = updateManager.updated(collection: items, with: objects, typeOfUpdate: updateType)
@@ -70,19 +70,19 @@ extension Presenter: PresenterProtocol{
     }
 }
 
-struct ScreenItemModel: ConfigItem {
+struct ConfigItemModel: ConfigItem {
     var key: String
     var image: ImageParameters?
 }
 
-extension ScreenItemModel: Equatable {
-    static func == (lhs: ScreenItemModel, rhs: ScreenItemModel) -> Bool {
+extension ConfigItemModel: Equatable {
+    static func == (lhs: ConfigItemModel, rhs: ConfigItemModel) -> Bool {
         return lhs.key == rhs.key
     }
 }
 
 
-extension ScreenItemModel {
+extension ConfigItemModel {
     init?(dictionary: [String: Any]?, key: String) {
         if let dict = dictionary,
            let imageUrl = dict[Constants.imageURL] as? String,
@@ -127,10 +127,10 @@ enum UpdateType<T> {
 }
 
 struct UpdateManager: Updater {
-    typealias T = ScreenItemModel
+    typealias T = ConfigItemModel
     
-    func typeOfUpdate(for collection: [ScreenItemModel], itemsToUpdate: [ScreenItemModel]) -> UpdateType<ScreenItemModel>? {
-        var type: UpdateType<ScreenItemModel>? = nil
+    func typeOfUpdate(for collection: [ConfigItemModel], itemsToUpdate: [ConfigItemModel]) -> UpdateType<ConfigItemModel>? {
+        var type: UpdateType<ConfigItemModel>? = nil
         for index in 0..<itemsToUpdate.count {
             let consideredItem = itemsToUpdate[index]
             if // Update condition:
@@ -159,7 +159,7 @@ struct UpdateManager: Updater {
         return type
     }
     
-    func updated(collection: [ScreenItemModel], with newValues: [ScreenItemModel], typeOfUpdate: UpdateType<ScreenItemModel>?) -> [ScreenItemModel] {
+    func updated(collection: [ConfigItemModel], with newValues: [ConfigItemModel], typeOfUpdate: UpdateType<ConfigItemModel>?) -> [ConfigItemModel] {
         guard let typeOfUpdate = typeOfUpdate else { return collection }
         var mutableCollection = collection
         switch typeOfUpdate {
