@@ -26,10 +26,13 @@ final class Presenter {
         setup()
     }
     
-    private func update(_ objects: [ConfigItemModel]) {
+    func update(_ objects: [ConfigItemModel]) {
         let updateManager = UpdateManager()
-        let updateType = updateManager.typeOfUpdate(for: items, itemsToUpdate: objects)
-        items = updateManager.updated(collection: items, with: objects, typeOfUpdate: updateType)
+        for index in 0..<objects.count {
+            let consideredItem = objects[index]
+            let updateType = updateManager.typeOfUpdate(for: items, itemToUpdate: consideredItem)
+            items = updateManager.updated(items, with: objects, typeOfUpdate: updateType)
+        }
         view?.reload()
     }
     
