@@ -29,6 +29,7 @@
 		922CFA942AFCF27900B4BE7C /* FirebaseRemoteConfigSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 922CFA932AFCF27900B4BE7C /* FirebaseRemoteConfigSwift */; };
 		926E0C7C2AFE41620016D91B /* MockedDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926E0C7B2AFE41620016D91B /* MockedDataSource.swift */; };
 		926E0C7E2AFE41790016D91B /* MockedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926E0C7D2AFE41790016D91B /* MockedView.swift */; };
+		926E0C802AFE44670016D91B /* UpdateManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926E0C7F2AFE44670016D91B /* UpdateManagerTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,7 @@
 		922CFA8E2AFCED4E00B4BE7C /* PresenterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresenterTest.swift; sourceTree = "<group>"; };
 		926E0C7B2AFE41620016D91B /* MockedDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockedDataSource.swift; sourceTree = "<group>"; };
 		926E0C7D2AFE41790016D91B /* MockedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockedView.swift; sourceTree = "<group>"; };
+		926E0C7F2AFE44670016D91B /* UpdateManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateManagerTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,6 +191,7 @@
 			children = (
 				926E0C7A2AFE40DE0016D91B /* Mocks */,
 				922CFA8E2AFCED4E00B4BE7C /* PresenterTest.swift */,
+				926E0C7F2AFE44670016D91B /* UpdateManagerTest.swift */,
 			);
 			path = CodingTaskTests;
 			sourceTree = "<group>";
@@ -341,6 +344,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				926E0C802AFE44670016D91B /* UpdateManagerTest.swift in Sources */,
 				922CFA8F2AFCED4E00B4BE7C /* PresenterTest.swift in Sources */,
 				926E0C7C2AFE41620016D91B /* MockedDataSource.swift in Sources */,
 				926E0C7E2AFE41790016D91B /* MockedView.swift in Sources */,

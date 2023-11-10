@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum UpdateType<T> {
+enum UpdateType<T: Equatable>: Equatable {
     case addition(element:T)
     case editing(element:T, atIndex: Array.Index )
     case deletion(atIndex: Array.Index )
