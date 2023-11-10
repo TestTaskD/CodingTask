@@ -8,7 +8,7 @@
 import Foundation
 import Firebase
 
-protocol DataSourceProtocol {
+public protocol DataSourceProtocol {
     func getAll() async throws -> [ConfigItemModel]
     
     var defaultValues: [RemoteConfigurationParameter] { get }
@@ -58,19 +58,21 @@ final class FirebaseDataSource {
 
 extension FirebaseDataSource: DataSourceProtocol {
     func getAll() async throws -> [ConfigItemModel] {
-        return try await withUnsafeThrowingContinuation({ continuation in
-            firebaseRemoteConfiguration.fetchAndActivate { (status, error) in
-                if let error = error {
-                    continuation.resume(throwing: error)
-                } else {
-                    let itemModels = self.defaultValues.compactMap({
-                        let dictionary = self.firebaseRemoteConfiguration.configValue(forKey: $0.key).jsonValue as? [String: Any]
-                        print("")
-                        return ConfigItemModel(dictionary: dictionary, key: $0.key)
-                    })
-                    continuation.resume(returning: itemModels)
-                }
-            }
-        })
+//        return try await withUnsafeThrowingContinuation({ continuation in
+//            firebaseRemoteConfiguration.fetchAndActivate { (status, error) in
+//                if let error = error {
+//                    continuation.resume(throwing: error)
+//                } else {
+//                    let itemModels = self.defaultValues.compactMap({
+//                        let dictionary = self.firebaseRemoteConfiguration.configValue(forKey: $0.key).jsonValue as? [String: Any]
+//                        print("")
+//                        return ConfigItemModel(dictionary: dictionary, key: $0.key)
+//                    })
+//                    continuation.resume(returning: itemModels)
+//                }
+//            }
+//        })
+        return [ConfigItemModel]()
     }
+        
 }

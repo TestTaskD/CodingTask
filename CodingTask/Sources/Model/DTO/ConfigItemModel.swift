@@ -7,9 +7,6 @@
 
 import Foundation
 
-
-
-
 protocol Keyable: Equatable {
     var key: String { get set }
 }
@@ -20,13 +17,13 @@ protocol ConfigImage: Equatable {
 
 typealias ConfigItem = Keyable & ConfigImage
 
-struct ConfigItemModel: ConfigItem {
+public struct ConfigItemModel: ConfigItem {
     var key: String
     var image: ImageParameters?
 }
 
 extension ConfigItemModel: Equatable {
-    static func == (lhs: ConfigItemModel, rhs: ConfigItemModel) -> Bool {
+    public static func == (lhs: ConfigItemModel, rhs: ConfigItemModel) -> Bool {
         return lhs.key == rhs.key
     }
 }

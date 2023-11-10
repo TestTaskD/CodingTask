@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol RemoteConfigurationParameter {
+public protocol RemoteConfigurationParameter {
     var key: String { get }
     func asDictionary() -> [String: NSObject]
 }

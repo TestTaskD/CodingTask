@@ -7,9 +7,9 @@
 
 import UIKit
 
-protocol ViewProtocol: AnyObject {
+public protocol ViewProtocol: AnyObject {
     func reload()
-    func reloadAtIndexPath(_ indexPath: [IndexPath])
+    func show(_ error: Error)
 }
 
 final class MainViewController: UIViewController {
@@ -55,10 +55,11 @@ extension MainViewController: ViewProtocol {
         collectionView.reloadData()
     }
     
-    func reloadAtIndexPath(_ indexPath: [IndexPath]) {
-        collectionView.performBatchUpdates { [weak collectionView] in
-            collectionView?.reloadItems(at: indexPath)
-        }
+    func show(_ error: Error) {
+        let alertController = UIAlertController(title: "Error occurs", message: error.localizedDescription.description, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default)
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true)
     }
 }
 

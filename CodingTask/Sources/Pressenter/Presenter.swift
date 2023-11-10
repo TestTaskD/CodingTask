@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol PresenterProtocol {
+public protocol PresenterProtocol {
     var view: ViewProtocol? { get set }
     var screenItems: [String] { get }
     
@@ -41,8 +41,8 @@ final class Presenter {
             switch result {
             case .success(let screenItemModels):
                 self?.update(screenItemModels)
-            case .failure(_):
-                print("")
+            case .failure(let error):
+                self?.view?.show(error)
             }
         }
     }
@@ -62,12 +62,9 @@ extension Presenter: PresenterProtocol{
             do {
                 items = try await dataSource.getAll()
                 print("Conficg fetched")
-                items.forEach({
-                    print("item key recieved: \($0.key)")
-                })
                 view?.reload()
             } catch {
-                print("error: \(error)")
+                view?.show(error)
             }
         }
     }
